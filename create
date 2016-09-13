@@ -9,8 +9,8 @@ docker run -it --rm --name certbot \
   quay.io/letsencrypt/letsencrypt:latest \
   --webroot \
   --email fredrik@nody.se \
-  -d nody.se \
-  -d www.nody.se \
+  -d bolaget.io \
+  -d www.bolaget.io \
   --agree-tos \
   -w /etc/letsencrypt/webrootauth \
   certonly
