@@ -2,11 +2,15 @@
 
 set -e
 
-docker run -it --rm --name certbot --webroot \
-  --email fredrik@nody.se \
-  --agree-tos \
-  -w /etc/letsencrypt/webrootauth
+docker run -it --rm --name certbot \
   -v "/var/log/letsencrypt:/var/log/letsencrypt" \
   -v "/etc/letsencrypt:/etc/letsencrypt" \
   -v "/var/lib/letsencrypt:/var/lib/letsencrypt" \
-  quay.io/letsencrypt/letsencrypt:latest certonly
+  quay.io/letsencrypt/letsencrypt:latest \
+  --webroot \
+  --email fredrik@nody.se \
+  -d nody.se \
+  -d www.nody.se \
+  --agree-tos \
+  -w /etc/letsencrypt/webrootauth \
+  certonly
