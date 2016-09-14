@@ -2,7 +2,7 @@
 
 set -e
 
-docker run -it --rm --name certbot \
+docker run -i --rm --name certbot \
   -v "/var/log/letsencrypt:/var/log/letsencrypt" \
   -v "/etc/letsencrypt:/etc/letsencrypt" \
   -v "/var/lib/letsencrypt:/var/lib/letsencrypt" \
@@ -10,6 +10,5 @@ docker run -it --rm --name certbot \
   --webroot \
   --email fredrik@nody.se \
   --agree-tos \
-  --non-interactive \
   -w /etc/letsencrypt/webrootauth \
   renew
