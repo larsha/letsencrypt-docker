@@ -10,5 +10,6 @@ docker run -it --rm --name certbot \
   --webroot \
   --email fredrik@nody.se \
   --agree-tos \
+  --non-interactive \
   -w /etc/letsencrypt/webrootauth \
   renew
