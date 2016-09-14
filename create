@@ -1,8 +1,20 @@
 #!/bin/bash
 
-# Use: ./create domain.se www.domain.se
+# Use: ./create domain.se, www.domain.se email@domain.se
 
 set -e
+
+if [ -z "$1" ]
+  then
+    echo "Missing domain(s) (e.g. domain.se, www.domain.se) as first argument."
+    exit 1
+fi
+
+if [ -z "$2" ]
+  then
+    echo "Missing e-mail as second argument."
+    exit 1
+fi
 
 docker run -i --rm --name certbot \
   -v "/var/log/letsencrypt:/var/log/letsencrypt" \
@@ -10,9 +22,8 @@ docker run -i --rm --name certbot \
   -v "/var/lib/letsencrypt:/var/lib/letsencrypt" \
   quay.io/letsencrypt/letsencrypt:latest \
   --webroot \
-  --email fredrik@nody.se \
-  -d $1 \
-  -d $2 \
+  --domains $1 \
+  --email $2 \
   --agree-tos \
   -w /etc/letsencrypt/webrootauth \
   certonly

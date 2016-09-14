@@ -1,6 +1,14 @@
 #!/bin/bash
 
+# Use: ./renew email@domain.se
+
 set -e
+
+if [ -z "$1" ]
+  then
+    echo "Missing e-mail as first argument."
+    exit 1
+fi
 
 docker run -i --rm --name certbot \
   -v "/var/log/letsencrypt:/var/log/letsencrypt" \
@@ -8,7 +16,7 @@ docker run -i --rm --name certbot \
   -v "/var/lib/letsencrypt:/var/lib/letsencrypt" \
   quay.io/letsencrypt/letsencrypt:latest \
   --webroot \
-  --email fredrik@nody.se \
+  --email $1 \
   --agree-tos \
   -w /etc/letsencrypt/webrootauth \
   renew
